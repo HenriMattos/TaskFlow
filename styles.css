@@ -1,0 +1,354 @@
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: #f5f6f5;
+    margin: 0;
+    padding: 20px;
+    color: #333;
+    line-height: 1.5;
+}
+
+h1 {
+    font-size: 1.8em;
+    color: #1a3c34;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.task-input {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.task-input button {
+    padding: 10px 18px;
+    background-color: #10b981;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s;
+}
+
+.task-input button:hover {
+    background-color: #059669;
+}
+
+.board {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.column {
+    background-color: #fff;
+    width: 100%;
+    max-width: 340px;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    box-sizing: border-box;
+    transition: border 0.2s ease;
+}
+
+.column.drag-accept {
+    border: 2px solid #10b981; /* Verde para aceitar */
+}
+
+.column.drag-reject {
+    border: 2px solid #ef4444; /* Vermelho para rejeitar */
+}
+
+.column h2 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 16px;
+    color: #1a3c34;
+    margin: 0 0 15px 0;
+}
+
+.column h2 span {
+    flex-grow: 1;
+    padding: 5px;
+    cursor: pointer;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.column h2 input[type="text"] {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #d1d5db;
+    border-radius: 5px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.add-column-task, .delete-column {
+    padding: 5px 10px;
+    background-color: #e5e7eb;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+    margin-left: 8px;
+    transition: background-color 0.2s;
+}
+
+.add-column-task:hover {
+    background-color: #d1d5db;
+}
+
+.delete-column {
+    background-color: #ef4444;
+    color: white;
+}
+
+.delete-column:hover {
+    background-color: #dc2626;
+}
+
+.task-list {
+    min-height: 50px;
+}
+
+.task {
+    background-color: #e6fffa;
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid #b0d4c8;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    cursor: grab;
+}
+
+.task:hover {
+    background-color: #d1fae5;
+}
+
+.task.completed {
+    background-color: #e5e7eb;
+    color: #6b7280;
+}
+
+.task-header {
+    display: flex;
+    align-items: center;
+}
+
+.task input[type="checkbox"] {
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+
+.task .task-content {
+    flex-grow: 1;
+    min-width: 0;
+}
+
+.task .task-content span {
+    display: block;
+    padding: 5px 0;
+    font-size: 14px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: text;
+}
+
+.task .task-content .completed span {
+    text-decoration: line-through;
+}
+
+.task .task-content input[type="text"] {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #d1d5db;
+    border-radius: 5px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.task .task-actions {
+    display: flex;
+    gap: 5px;
+    flex-shrink: 0;
+}
+
+.task .task-actions button {
+    padding: 5px 8px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background-color 0.2s;
+}
+
+.task .task-actions .add-subtask {
+    background-color: #10b981;
+    color: white;
+}
+
+.task .task-actions .add-subtask:hover {
+    background-color: #059669;
+}
+
+.task .task-actions .delete {
+    background-color: #ef4444;
+    color: white;
+}
+
+.task .task-actions .delete:hover {
+    background-color: #dc2626;
+}
+
+.subtask-list {
+    margin-top: 5px;
+    padding-left: 30px;
+}
+
+.subtask {
+    display: flex;
+    align-items: center;
+    padding: 6px 0;
+    border-top: 1px solid #e5e7eb;
+    cursor: grab;
+}
+
+.subtask:first-child {
+    border-top: none;
+}
+
+.subtask:hover {
+    background-color: #f9fafb;
+}
+
+.subtask input[type="checkbox"] {
+    margin-right: 8px;
+    flex-shrink: 0;
+}
+
+.subtask span {
+    flex-grow: 1;
+    padding: 5px 0;
+    font-size: 13px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: text;
+}
+
+.subtask.completed span {
+    text-decoration: line-through;
+}
+
+.subtask input[type="text"] {
+    width: 100%;
+    padding: 4px;
+    border: 1px solid #d1d5db;
+    border-radius: 5px;
+    font-size: 13px;
+    box-sizing: border-box;
+}
+
+.subtask .delete {
+    padding: 3px 6px;
+    background-color: #ef4444;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 10px;
+    margin-left: 5px;
+    transition: background-color 0.2s;
+}
+
+.subtask .delete:hover {
+    background-color: #dc2626;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    body {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 1.5em;
+    }
+
+    .task-input {
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .task-input button {
+        width: 100%;
+        max-width: 200px;
+    }
+
+    .board {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .column {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 1.3em;
+    }
+
+    .task-input button {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+
+    .column {
+        padding: 12px;
+    }
+
+    .column h2 {
+        font-size: 14px;
+    }
+
+    .task {
+        padding: 8px;
+    }
+
+    .task .task-content span {
+        font-size: 13px;
+    }
+
+    .task .task-actions button {
+        padding: 4px 6px;
+        font-size: 10px;
+    }
+
+    .subtask {
+        padding: 4px 0;
+    }
+
+    .subtask span {
+        font-size: 12px;
+    }
+
+    .subtask .delete {
+        padding: 2px 5px;
+    }
+}
