@@ -3,21 +3,243 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerenciador de Tarefas</title>
+    <title>TaskFlow</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📝</text></svg>">
 </head>
 <body>
-    <h1>Gerenciador de Tarefas</h1>
-    <div class="task-input">
-        <button onclick="addColumn()">Nova Coluna</button>
-        <button onclick="exportState()">Exportar</button>
-        <input type="file" id="importInput" accept=".json" style="display: none;" onchange="importState(event)">
-        <button onclick="document.getElementById('importInput').click()">Importar</button>
-    </div>
-    <div class="board">
-        <!-- Colunas serão criadas dinamicamente -->
-    </div>
+    <header>
+        <div class="view-controls">
+            <button id="compact-view-btn" onclick="toggleCompactView()" title="Alternar visualização compacta">
+                <i class="fas fa-compress-alt compact-icon"></i>
+                <span class="view-label">Compacto</span>
+            </button>
+            <div class="sort-dropdown">
+                <button id="sort-btn" title="Ordenar tarefas">
+                    <i class="fas fa-sort-amount-down sort-icon"></i>
+                    <span class="view-label">Ordenar</span>
+                </button>
+                <div class="sort-dropdown-content">
+                    <a href="#" onclick="sortTasks('title', 'asc')">Título (A-Z)</a>
+                    <a href="#" onclick="sortTasks('title', 'desc')">Título (Z-A)</a>
+                    <a href="#" onclick="sortTasks('dueDate', 'asc')">Data (Próximas)</a>
+                    <a href="#" onclick="sortTasks('dueDate', 'desc')">Data (Distantes)</a>
+                    <a href="#" onclick="sortTasks('priority', 'desc')">Prioridade (Alta-Baixa)</a>
+                    <a href="#" onclick="sortTasks('priority', 'asc')">Prioridade (Baixa-Alta)</a>
+                    <a href="#" onclick="sortTasks('completed', 'asc')">Pendentes primeiro</a>
+                    <a href="#" onclick="sortTasks('completed', 'desc')">Concluídas primeiro</a>
+                </div>
+            </div>
+            <button id="focus-mode-btn" onclick="toggleFocusMode()" title="Modo de foco">
+                <i class="fas fa-bullseye focus-icon"></i>
+                <span class="view-label">Foco</span>
+            </button>
+        </div>
+        <div class="pomodoro-container">
+            <button id="pomodoro-btn" onclick="togglePomodoro()" title="Timer Pomodoro">
+                <i class="fas fa-clock pomodoro-icon"></i>
+                <span class="view-label">Pomodoro</span>
+            </button>
+        </div>
+        <div class="theme-toggle">
+            <div class="theme-dropdown">
+                <button id="theme-toggle-btn" onclick="toggleTheme()" title="Alternar tema claro/escuro">
+                    <i class="fas fa-sun light-icon"></i>
+                    <i class="fas fa-moon dark-icon"></i>
+                </button>
+                <button id="custom-theme-btn" onclick="showThemeSelector()" title="Personalizar tema">
+                    <i class="fas fa-palette theme-icon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="welcome">
+            <h1>TaskFlow</h1>
+            <h2>Organize suas tarefas com estilo</h2>
+        </section>
+
+        <div class="dashboard">
+            <div class="info-card total-tasks">
+                <div class="info-icon"><i class="fas fa-tasks"></i></div>
+                <div class="info-content">
+                    <h3>Total de Tarefas</h3>
+                    <p id="total-tasks-count">0</p>
+                </div>
+            </div>
+            <div class="info-card completed-tasks">
+                <div class="info-icon"><i class="fas fa-check-circle"></i></div>
+                <div class="info-content">
+                    <h3>Tarefas Concluídas</h3>
+                    <p id="completed-tasks-count">0</p>
+                </div>
+            </div>
+            <div class="info-card pending-tasks">
+                <div class="info-icon"><i class="fas fa-hourglass-half"></i></div>
+                <div class="info-content">
+                    <h3>Tarefas Pendentes</h3>
+                    <p id="pending-tasks-count">0</p>
+                </div>
+            </div>
+            <div class="info-card overdue-tasks">
+                <div class="info-icon"><i class="fas fa-exclamation-triangle"></i></div>
+                <div class="info-content">
+                    <h3>Tarefas Atrasadas</h3>
+                    <p id="overdue-tasks-count">0</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Buscar tarefas..." onkeyup="searchTasks()">
+            <button id="search-button" onclick="searchTasks()"><i class="fas fa-search"></i></button>
+        </div>
+        
+        <div class="filters-container">
+            <div class="filters-label">Filtrar por:</div>
+            <div class="filter-buttons">
+                <button class="filter-button active" data-filter="all" onclick="filterTasks('all')">Todas</button>
+                <button class="filter-button" data-filter="pending" onclick="filterTasks('pending')">Pendentes</button>
+                <button class="filter-button" data-filter="completed" onclick="filterTasks('completed')">Concluídas</button>
+                <button class="filter-button" data-filter="overdue" onclick="filterTasks('overdue')">Atrasadas</button>
+            </div>
+        </div>
+        
+        <div id="no-results-message">
+            <p>Nenhuma tarefa encontrada com os termos da busca.</p>
+            <p>Tente outros termos ou limpe a busca para ver todas as tarefas.</p>
+        </div>
+
+        <div class="controls">
+            <button onclick="addFolder()" class="comic-button"><i class="fas fa-folder-plus"></i> Adicionar Pasta</button>
+            <button onclick="addColumn()" class="comic-button"><i class="fas fa-columns"></i> Adicionar Coluna</button>
+            <button onclick="exportState()" class="comic-button"><i class="fas fa-download"></i> Salvar JSON</button>
+            <input type="file" id="importInput" accept=".json" style="display: none;" onchange="importState(event)">
+            <button onclick="document.getElementById('importInput').click()" class="comic-button"><i class="fas fa-upload"></i> Carregar JSON</button>
+            <button onclick="showExportPdfOptions()" class="comic-button"><i class="fas fa-file-pdf"></i> Exportar PDF</button>
+        </div>
+
+        <div class="folders-container">
+            <!-- Pastas serão criadas dinamicamente -->
+        </div>
+
+        <div class="board" style="display: none;">
+            <!-- Mantido para compatibilidade, será substituído pela estrutura de pastas -->
+        </div>
+    </main>
+
     <input type="color" id="colorPicker" style="display: none;">
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+    
+    <!-- Template para pasta -->
+    <template id="folder-template">
+        <div class="folder">
+            <div class="folder-header">
+                <h3 class="folder-title">Nova Pasta</h3>
+                <div class="folder-controls">
+                    <button class="folder-add-column" onclick="addColumnToFolder(this)"><i class="fas fa-plus"></i> Coluna</button>
+                    <button class="folder-edit" onclick="editFolder(this)"><i class="fas fa-edit"></i> Editar</button>
+                    <button class="folder-delete" onclick="deleteFolder(this)"><i class="fas fa-trash-alt"></i> Excluir</button>
+                    <button class="folder-focus" onclick="focusOnFolder(this)" title="Focar nesta pasta"><i class="fas fa-search-plus"></i></button>
+                </div>
+            </div>
+            <div class="folder-content">
+                <!-- Colunas serão adicionadas aqui -->
+            </div>
+        </div>
+    </template>
+    
+    <!-- Template para card de tarefa -->
+    <template id="task-template">
+        <div class="task" draggable="true">
+            <div class="task-priority"></div>
+            <div class="task-content">
+                <h4 class="task-title">Nova Tarefa</h4>
+                <div class="task-meta">
+                    <span class="task-date"></span>
+                    <span class="task-tags"></span>
+                </div>
+                <div class="task-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
+                    </div>
+                    <span class="progress-text">0%</span>
+                </div>
+            </div>
+            <div class="task-controls">
+                <button class="task-edit"><i class="fas fa-edit"></i></button>
+                <button class="task-delete"><i class="fas fa-trash-alt"></i></button>
+            </div>
+        </div>
+    </template>
+    
+    <footer>
+        <p>TaskFlow - Organize suas tarefas com estilo</p>
+        <div class="footer-links">
+            <button onclick="showHelp()">Ajuda</button>
+            <button onclick="showShortcuts()">Atalhos</button>
+            <button onclick="clearAllData()">Limpar Dados</button>
+        </div>
+    </footer>
+    
+    <div id="pomodoro-modal" class="pomodoro-modal">
+        <div class="pomodoro-content">
+            <div class="pomodoro-header">
+                <h3>Timer Pomodoro</h3>
+                <span class="close-pomodoro" onclick="togglePomodoro()"><i class="fas fa-times"></i></span>
+            </div>
+            <div class="timer-display">
+                <span id="timer-minutes">25</span>:<span id="timer-seconds">00</span>
+            </div>
+            <div class="timer-mode">
+                <span id="timer-mode-label">Modo: Foco</span>
+            </div>
+            <div class="timer-controls">
+                <button id="start-timer" onclick="startPomodoro()"><i class="fas fa-play"></i> Iniciar</button>
+                <button id="pause-timer" onclick="pausePomodoro()" disabled><i class="fas fa-pause"></i> Pausar</button>
+                <button id="reset-timer" onclick="resetPomodoro()"><i class="fas fa-redo"></i> Reiniciar</button>
+            </div>
+            <div class="timer-settings">
+                <div class="setting">
+                    <label for="focus-time">Tempo de foco (min):</label>
+                    <input type="number" id="focus-time" min="1" max="60" value="25" onchange="updatePomodoroSettings()">
+                </div>
+                <div class="setting">
+                    <label for="break-time">Tempo de pausa (min):</label>
+                    <input type="number" id="break-time" min="1" max="30" value="5" onchange="updatePomodoroSettings()">
+                </div>
+                <div class="setting">
+                    <label for="long-break-time">Pausa longa (min):</label>
+                    <input type="number" id="long-break-time" min="5" max="60" value="15" onchange="updatePomodoroSettings()">
+                </div>
+                <div class="setting">
+                    <label for="pomodoro-cycles">Ciclos até pausa longa:</label>
+                    <input type="number" id="pomodoro-cycles" min="1" max="10" value="4" onchange="updatePomodoroSettings()">
+                </div>
+            </div>
+            <div class="pomodoro-stats">
+                <div class="stat">
+                    <span class="stat-label">Ciclos completos:</span>
+                    <span id="completed-cycles">0</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-label">Tempo total de foco:</span>
+                    <span id="total-focus-time">0 min</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
