@@ -1,75 +1,67 @@
 # 🚀 TaskFlow
 
-TaskFlow é uma aplicação web moderna para gerenciamento de tarefas e projetos, com uma interface elegante e intuitiva que combina funcionalidade com uma excelente experiência do usuário.
+TaskFlow is a modern web application for task and project management, featuring a sleek and intuitive interface that combines functionality with an excellent user experience.
 
 ![TaskFlow Preview](logo.png)
 
-## ✨ Funcionalidades
+## ✨ Features
 
-### 📋 Gerenciamento de Tarefas
-- Criação, edição e exclusão de tarefas
-- Organização em colunas personalizáveis
-- Sistema de prioridades
-- Datas de vencimento
-- Tags e categorias
-- Progresso das tarefas
+### 📋 Task Management
+- Task creation, editing, and deletion
+- Organization in customizable columns
+- Priority system
+- Due dates
+- Tags and categories
+- Task progress tracking
 
-### 📁 Organização em Pastas
-- Agrupamento de tarefas em pastas
-- Gerenciamento flexível de projetos
-- Visualização personalizada
-- Drag and drop intuitivo
+### 📁 Folder Organization
+- Grouping tasks into folders
+- Flexible project management
+- Customizable view
+- Intuitive drag-and-drop functionality
 
-### ⚡ Recursos Avançados
-- **Modo Foco**: Concentre-se em tarefas específicas
-- **Timer Pomodoro**: Gerencie seu tempo eficientemente
-- **Modo Compacto**: Visualização otimizada
-- **Temas Personalizáveis**: Claro, escuro e customizável
-- **Filtros e Ordenação**: Encontre tarefas rapidamente
-- **Responsivo**: Funciona em qualquer dispositivo
+### ⚡ Advanced Features
+- **Focus Mode**: Concentrate on specific tasks
+- **Pomodoro Timer**: Manage your time efficiently
+- **Compact Mode**: Optimized viewing
+- **Customizable Themes**: Light, dark, and customizable
+- **Filters and Sorting**: Quickly find tasks
+- **Responsive**: Works on any device
 
-## 🎨 Design Moderno
+## 🎨 Modern Design
 
-- Interface limpa e moderna
-- Animações suaves
-- Efeitos visuais elegantes
-- Feedback visual intuitivo
-- Acessibilidade aprimorada
+- Clean and modern interface
+- Smooth animations
+- Elegant visual effects
+- Intuitive visual feedback
+- Enhanced accessibility
 
-## 🛠️ Tecnologias Utilizadas
+## 🛠️ Technologies Used
 
 - HTML5
-- CSS3 (com variáveis CSS e flexbox/grid)
+- CSS3 (with CSS variables, flexbox, and grid)
 - JavaScript (Vanilla)
-- Font Awesome para ícones
+- Font Awesome for icons
 - Google Fonts
 
-## 💻 Como Usar
+## 💻 How to Use
 
-1. **Criar uma Nova Pasta**
-   - Clique no botão "Adicionar Pasta"
-   - Digite o nome da pasta
-   - Confirme a criação
+1. **Create a New Folder**
+   - Click the "Add Folder" button
+   - Enter the folder name
+   - Confirm creation
 
-2. **Adicionar Colunas**
-   - Dentro de uma pasta, clique em "Adicionar Coluna"
-   - Digite o nome da coluna
-   - Organize suas tarefas
+2. **Add Columns**
+   - Inside a folder, click "Add Column"
+   - Enter the column name
+   - Organize your tasks
 
-3. **Gerenciar Tarefas**
-   - Clique no botão "+" em uma coluna
-   - Preencha os detalhes da tarefa
-   - Arraste e solte para organizar
+3. **Manage Tasks**
+   - Click the "+" button in a column
+   - Fill in the task details
+   - Drag and drop to organize
 
-4. **Recursos Especiais**
-   - Use o modo foco para concentração
-   - Ative o timer pomodoro para produtividade
-   - Alterne entre temas para conforto visual
-
-## 🤝 Contribuindo
-
-1. Faça um Fork do projeto
-2. Crie uma Branch para sua Feature (\`git checkout -b feature/AmazingFeature\`)
-3. Commit suas mudanças (\`git commit -m 'Add some AmazingFeature'\`)
-4. Push para a Branch (\`git push origin feature/AmazingFeature\`)
-5. Abra um Pull Request
+4. **Special Features**
+   - Use Focus Mode for concentration
+   - Activate the Pomodoro Timer for productivity
+   - Switch between themes for visual comfort
