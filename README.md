@@ -73,13 +73,3 @@ TaskFlow é uma aplicação web moderna para gerenciamento de tarefas e projetos
 3. Commit suas mudanças (\`git commit -m 'Add some AmazingFeature'\`)
 4. Push para a Branch (\`git push origin feature/AmazingFeature\`)
 5. Abra um Pull Request
-
-## 📄 Licença
-
-Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
-
-## 👏 Agradecimentos
-
-- Font Awesome pela biblioteca de ícones
-- Google Fonts pelas fontes
-- Comunidade open source
