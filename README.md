@@ -2,7 +2,7 @@
 
 TaskFlow é uma aplicação web moderna para gerenciamento de tarefas e projetos, com uma interface elegante e intuitiva que combina funcionalidade com uma excelente experiência do usuário.
 
-![TaskFlow Preview](.logo.png)
+![TaskFlow Preview](logo.png)
 
 ## ✨ Funcionalidades
 
