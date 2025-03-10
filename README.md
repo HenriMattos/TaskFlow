@@ -2,7 +2,7 @@
 
 TaskFlow é uma aplicação web moderna para gerenciamento de tarefas e projetos, com uma interface elegante e intuitiva que combina funcionalidade com uma excelente experiência do usuário.
 
-![TaskFlow Preview](./assets/preview.png)
+![TaskFlow Preview](.logo.png)
 
 ## ✨ Funcionalidades
 
@@ -44,27 +44,6 @@ TaskFlow é uma aplicação web moderna para gerenciamento de tarefas e projetos
 - Font Awesome para ícones
 - Google Fonts
 
-## 📦 Instalação
-
-1. Clone o repositório:
-\`\`\`bash
-git clone https://github.com/seu-usuario/taskflow.git
-\`\`\`
-
-2. Navegue até o diretório:
-\`\`\`bash
-cd taskflow
-\`\`\`
-
-3. Abra o arquivo index.html em seu navegador ou use um servidor local:
-\`\`\`bash
-# Usando Python
-python -m http.server 8000
-
-# Usando Node.js
-npx serve
-\`\`\`
-
 ## 💻 Como Usar
 
 1. **Criar uma Nova Pasta**
@@ -87,34 +66,6 @@ npx serve
    - Ative o timer pomodoro para produtividade
    - Alterne entre temas para conforto visual
 
-## ⚙️ Configuração
-
-### Temas
-Personalize as cores do aplicativo editando as variáveis CSS em `:root`:
-
-\`\`\`css
-:root {
-    --primary-color: #4a6bff;
-    --secondary-color: #ff6b6b;
-    --accent-color: #ffbe0b;
-    /* ... outras variáveis ... */
-}
-\`\`\`
-
-### Preferências
-Ajuste as configurações através do menu de preferências:
-- Tema (Claro/Escuro)
-- Modo Compacto
-- Ordenação padrão
-- Timer Pomodoro
-
-## 📱 Responsividade
-
-TaskFlow é totalmente responsivo e se adapta a diferentes tamanhos de tela:
-- Desktop (1200px+)
-- Tablet (768px - 1199px)
-- Mobile (< 768px)
-
 ## 🤝 Contribuindo
 
 1. Faça um Fork do projeto
@@ -132,12 +83,3 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 - Font Awesome pela biblioteca de ícones
 - Google Fonts pelas fontes
 - Comunidade open source
-
-## 📧 Contato
-
-Seu Nome - [@seu_twitter](https://twitter.com/seu_twitter) - email@exemplo.com
-
-Link do Projeto: [https://github.com/seu-usuario/taskflow](https://github.com/seu-usuario/taskflow)
-
----
-⌨️ com ❤️ por [Seu Nome](https://github.com/seu-usuario) 😊 
